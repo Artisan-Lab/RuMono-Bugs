@@ -268,7 +268,7 @@ Response: The developer has not responded to these bugs.
 
 ## html2text
 
-Issue URL: https://github.com/jbaublitz/neli/issues/236
+Issue URL: https://github.com/jugglerchris/rust-html2text/issues/93
 
 Version: `0.6.0`
 
@@ -329,7 +329,7 @@ let d1 = TrivialDecorator::new();
 let _local1 = html2text::RenderTree::render(_local0, 1, d1);
 ```
 
-Response: The developer considered bug-15 as a false positive. Bug-17 and bug-18 as the misuse of low-level APIs, yet it reveals that the library exposes some low-level APIs to public so that allows user misuse these APIs. We suggest developer to add some assertions to provide clear information for users, or consider config these low-level APIs to private. The rest of the bugs are confirmed and fixed by the maintainer. 
+Response: The developer considered bug-15 as the false positive since the given input of `html2text::render::text_renderer::SubRenderer::new` is requiring an unreasonable amount of RAM in this bug. The developer considered bug-17 and bug-18 as the misuse of low-level APIs, yet it reveals that the library exposes some low-level APIs to the public, so that allows users to misuse these APIs. We suggest adding some assertions to provide clear information for users, or consider configuring these low-level APIs to private. The rest of the bugs are confirmed and fixed by the maintainer. 
 
 ## xorfilter
 
