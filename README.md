@@ -1,7 +1,35 @@
 # RuMono Bugs
 This is the collection of bugs detected by RuMono. RuMono is a tool to synthesize fuzz drivers (harnesses) for the Rust library, with the support for Rust generic system. We utilize RuMono to test 29 Rust libraries and detect 23 bugs, 18 of which are related to generic APIs. We have reported all bugs to maintainers by creating bug issues in their github repositories. 
 
-We list all bug reports below, grouped by the library.
+Here is the overview of detected bugs.
+
+| Bug ID | Library      | Category      | Issue URL                                                | note           |
+| ------ | ------------ | ------------- | -------------------------------------------------------- | -------------- |
+| bug-01 | regex        | utf-8         | https://github.com/rust-lang/regex/issues/1006           |                |
+| bug-02 | regex        | utf-8         | https://github.com/rust-lang/regex/issues/1006           |                |
+| bug-03 | form-encoded | utf-8         | https://github.com/servo/rust-url/issues/872             |                |
+| bug-04 | monero-rs    | OOB           | https://github.com/monero-rs/monero-rs/issues/193        |                |
+| bug-05 | monero-rs    | OOM           | https://github.com/monero-rs/monero-rs/issues/193        |                |
+| bug-06 | monero-rs    | overflow      | https://github.com/monero-rs/monero-rs/issues/193        |                |
+| bug-07 | lofty        | unreachable   | https://github.com/Serial-ATA/lofty-rs/issues/295        |                |
+| bug-08 | lofty        | overflow      | https://github.com/Serial-ATA/lofty-rs/issues/295        |                |
+| bug-09 | odoh_rs      | OOM           | https://github.com/cloudflare/odoh-rs/issues/30          | false positive |
+| bug-10 | odoh_rs      | OOM           | https://github.com/cloudflare/odoh-rs/issues/30          | false positive |
+| bug-11 | neli         | overflow      | https://github.com/jbaublitz/neli/issues/236             |                |
+| bug-12 | neli         | overflow      | https://github.com/jbaublitz/neli/issues/236             |                |
+| bug-13 | neli         | overflow      | https://github.com/jbaublitz/neli/issues/236             |                |
+| bug-14 | neli         | OOM           | https://github.com/jbaublitz/neli/issues/236             |                |
+| bug-15 | html2text    | OOM           | https://github.com/jugglerchris/rust-html2text/issues/93 | false positive |
+| bug-16 | html2text    | overflow      | https://github.com/jugglerchris/rust-html2text/issues/93 | misuse         |
+| bug-17 | html2text    | unwrap        | https://github.com/jugglerchris/rust-html2text/issues/93 | misuse         |
+| bug-18 | html2text    | unreachable   | https://github.com/jugglerchris/rust-html2text/issues/93 |                |
+| bug-19 | html2text    | infinite loop | https://github.com/jugglerchris/rust-html2text/issues/93 |                |
+| bug-20 | xorfilter    | overflow      | https://github.com/prataprc/xorfilter/issues/33          |                |
+| bug-21 | xorfilter    | OOB           | https://github.com/prataprc/xorfilter/issues/33          |                |
+| bug-22 | num          | overflow      | https://github.com/rust-num/num/issues/431               | false positive |
+| bug-23 | tui          | overflow      | n/a                                                      |                |
+
+We list all bug details below, including links to issues, affected versions, involved generic APIs, etc., grouped by library.
 
 ## regex
 
