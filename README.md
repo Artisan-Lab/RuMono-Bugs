@@ -20,16 +20,16 @@ Here is the overview of detected bugs.
 | bug-13 | neli         | overflow      | https://github.com/jbaublitz/neli/issues/236             |                |
 | bug-14 | neli         | OOM           | https://github.com/jbaublitz/neli/issues/236             |                |
 | bug-15 | html2text    | OOM           | https://github.com/jugglerchris/rust-html2text/issues/93 | false positive |
-| bug-16 | html2text    | overflow      | https://github.com/jugglerchris/rust-html2text/issues/93 | misuse         |
+| bug-16 | html2text    | overflow      | https://github.com/jugglerchris/rust-html2text/issues/93 |                |
 | bug-17 | html2text    | unwrap        | https://github.com/jugglerchris/rust-html2text/issues/93 | misuse         |
-| bug-18 | html2text    | unreachable   | https://github.com/jugglerchris/rust-html2text/issues/93 |                |
+| bug-18 | html2text    | unreachable   | https://github.com/jugglerchris/rust-html2text/issues/93 | misuse         |
 | bug-19 | html2text    | infinite loop | https://github.com/jugglerchris/rust-html2text/issues/93 |                |
 | bug-20 | xorfilter    | overflow      | https://github.com/prataprc/xorfilter/issues/33          |                |
 | bug-21 | xorfilter    | OOB           | https://github.com/prataprc/xorfilter/issues/33          |                |
 | bug-22 | num          | overflow      | https://github.com/rust-num/num/issues/431               | false positive |
 | bug-23 | tui          | overflow      | n/a                                                      |                |
 
-We list all bug details below, including links to issues, affected versions, involved generic APIs, etc., grouped by library.
+We list all bug details below, including links to issues, affected versions, involved generic APIs and other information, grouped by library.
 
 ## regex
 
