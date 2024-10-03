@@ -1,35 +1,34 @@
 # RuMono Bugs
 This is the collection of bugs detected by RuMono. RuMono is a tool to synthesize fuzz drivers (harnesses) for the Rust library, with the support for Rust generic system. We utilize RuMono to test 29 Rust libraries and detect 23 bugs, 18 of which are related to generic APIs. We have reported all bugs to maintainers by creating bug issues in their github repositories. 
 
-Here is the overview of detected bugs.
+Here is the overview of detected bugs. We list all bug details below, including links to issues, affected versions, involved generic APIs and other information, grouped by library. Click the link to navigate to the corresponding bug report.
 
-| Bug ID | Library      | Category      | Issue URL                                                | note           |
-| ------ | ------------ | ------------- | -------------------------------------------------------- | -------------- |
-| bug-01 | regex        | utf-8         | https://github.com/rust-lang/regex/issues/1006           |                |
-| bug-02 | regex        | utf-8         | https://github.com/rust-lang/regex/issues/1006           |                |
-| bug-03 | form-encoded | utf-8         | https://github.com/servo/rust-url/issues/872             |                |
-| bug-04 | monero-rs    | OOB           | https://github.com/monero-rs/monero-rs/issues/193        |                |
-| bug-05 | monero-rs    | OOM           | https://github.com/monero-rs/monero-rs/issues/193        |                |
-| bug-06 | monero-rs    | overflow      | https://github.com/monero-rs/monero-rs/issues/193        |                |
-| bug-07 | lofty        | unreachable   | https://github.com/Serial-ATA/lofty-rs/issues/295        |                |
-| bug-08 | lofty        | overflow      | https://github.com/Serial-ATA/lofty-rs/issues/295        |                |
-| bug-09 | odoh_rs      | OOM           | https://github.com/cloudflare/odoh-rs/issues/30          | false positive |
-| bug-10 | odoh_rs      | OOM           | https://github.com/cloudflare/odoh-rs/issues/30          | false positive |
-| bug-11 | neli         | overflow      | https://github.com/jbaublitz/neli/issues/236             |                |
-| bug-12 | neli         | overflow      | https://github.com/jbaublitz/neli/issues/236             |                |
-| bug-13 | neli         | overflow      | https://github.com/jbaublitz/neli/issues/236             |                |
-| bug-14 | neli         | OOM           | https://github.com/jbaublitz/neli/issues/236             |                |
-| bug-15 | html2text    | OOM           | https://github.com/jugglerchris/rust-html2text/issues/93 | false positive |
-| bug-16 | html2text    | overflow      | https://github.com/jugglerchris/rust-html2text/issues/93 |                |
-| bug-17 | html2text    | unwrap        | https://github.com/jugglerchris/rust-html2text/issues/93 | misuse         |
-| bug-18 | html2text    | unreachable   | https://github.com/jugglerchris/rust-html2text/issues/93 | misuse         |
-| bug-19 | html2text    | infinite loop | https://github.com/jugglerchris/rust-html2text/issues/93 |                |
-| bug-20 | xorfilter    | overflow      | https://github.com/prataprc/xorfilter/issues/33          |                |
-| bug-21 | xorfilter    | OOB           | https://github.com/prataprc/xorfilter/issues/33          |                |
-| bug-22 | num          | overflow      | https://github.com/rust-num/num/issues/431               | false positive |
-| bug-23 | tui          | overflow      | n/a                                                      |                |
+| Bug ID            | Library      | Category      | Issue URL                                                | note           |
+| ----------------- | ------------ | ------------- | -------------------------------------------------------- | -------------- |
+| [bug-01](#bug-01) | regex        | utf-8         | https://github.com/rust-lang/regex/issues/1006           |                |
+| [bug-02](#bug-02) | regex        | utf-8         | https://github.com/rust-lang/regex/issues/1006           |                |
+| [bug-03](#bug-03) | form-encoded | utf-8         | https://github.com/servo/rust-url/issues/872             |                |
+| [bug-04](#bug-04) | monero-rs    | OOB           | https://github.com/monero-rs/monero-rs/issues/193        |                |
+| [bug-05](#bug-05) | monero-rs    | OOM           | https://github.com/monero-rs/monero-rs/issues/193        |                |
+| [bug-06](#bug-06) | monero-rs    | overflow      | https://github.com/monero-rs/monero-rs/issues/193        |                |
+| [bug-07](#bug-07) | lofty        | unreachable   | https://github.com/Serial-ATA/lofty-rs/issues/295        |                |
+| [bug-08](#bug-08) | lofty        | overflow      | https://github.com/Serial-ATA/lofty-rs/issues/295        |                |
+| [bug-09](#bug-09) | odoh_rs      | OOM           | https://github.com/cloudflare/odoh-rs/issues/30          | false positive |
+| [bug-10](#bug-10) | odoh_rs      | OOM           | https://github.com/cloudflare/odoh-rs/issues/30          | false positive |
+| [bug-11](#bug-11) | neli         | overflow      | https://github.com/jbaublitz/neli/issues/236             |                |
+| [bug-12](#bug-12) | neli         | overflow      | https://github.com/jbaublitz/neli/issues/236             |                |
+| [bug-13](#bug-13) | neli         | overflow      | https://github.com/jbaublitz/neli/issues/236             |                |
+| [bug-14](#bug-14) | neli         | OOM           | https://github.com/jbaublitz/neli/issues/236             |                |
+| [bug-15](#bug-15) | html2text    | OOM           | https://github.com/jugglerchris/rust-html2text/issues/93 | false positive |
+| [bug-16](#bug-16) | html2text    | overflow      | https://github.com/jugglerchris/rust-html2text/issues/93 |                |
+| [bug-17](#bug-17) | html2text    | unwrap        | https://github.com/jugglerchris/rust-html2text/issues/93 | misuse         |
+| [bug-18](#bug-18) | html2text    | unreachable   | https://github.com/jugglerchris/rust-html2text/issues/93 | misuse         |
+| [bug-19](#bug-19) | html2text    | infinite loop | https://github.com/jugglerchris/rust-html2text/issues/93 |                |
+| [bug-20](#bug-20) | xorfilter    | overflow      | https://github.com/prataprc/xorfilter/issues/33          |                |
+| [bug-21](#bug-21) | xorfilter    | OOB           | https://github.com/prataprc/xorfilter/issues/33          |                |
+| [bug-22](#bug-22) | num          | overflow      | https://github.com/rust-num/num/issues/431               | false positive |
+| [bug-23](#bug-23) | tui          | overflow      | n/a                                                      |                |
 
-We list all bug details below, including links to issues, affected versions, involved generic APIs and other information, grouped by library.
 
 ## regex
 
@@ -45,9 +44,9 @@ Description:
 
 - Bug-01, bug-02 panicked at "byte index x is not a char boundary" in the generic API `regex::Regex::replace` and `regex::Regex::replace_all`.
 
-PoC:
+### PoC
 
-- bug-01
+#### bug-01
 
 ```rust
 fn main() {
@@ -58,7 +57,7 @@ fn main() {
 }
 ```
 
-- bug-02
+#### bug-02
 
 ```rust
 fn main(){
@@ -85,9 +84,9 @@ Bug description:
 
 - Bug-03 panicked at "assertion failed: self.is_char_boundary(new_len)". The generic API `for_suffix`  will cause unexpected panic when receiving certain utf-8 string.
 
-PoC:
+### PoC
 
-- bug-03
+#### bug-03
 
 ```rust
 use std::string::String;
@@ -119,9 +118,9 @@ Bug description:
 - bug-05 causes an memory allocation fail.
 - bug-06 panicked at "attempt to subtract with overflow". Like bug-04, several monomorphic APIs of `consensus_decode` can trigger this panic.
 
-PoC:
+### PoC
 
-- bug-04
+#### bug-04
 
 ```rust
 fn main(){
@@ -131,7 +130,7 @@ fn main(){
 }
 ```
 
-- bug-05
+#### bug-05
 
 ```rust
 fn main(){
@@ -141,7 +140,7 @@ fn main(){
 }
 ```
 
-- bug-06
+#### bug-06
 
 ```rust
 fn main(){
@@ -170,9 +169,9 @@ Bug description:
 - bug-07 panicked at "internal error: entered unreachable code".
 - bug-08 panicked at "attempt to add with overflow".
 
-PoC:
+### PoC
 
-- bug-07
+#### bug-07
 
 ```rust
 let data=[1,0,0,0];
@@ -183,7 +182,7 @@ let _local2_param0_helper1 = &mut (&data[..]);
 let _: lofty::error::Result::<std::option::Option::<lofty::id3::v2::ExtendedTextFrame>> = lofty::id3::v2::ExtendedTextFrame::parse(_local2_param0_helper1, _local1);
 ```
 
-- bug-08
+#### bug-08
 
 ```rust
 let data=[57, 25, 25, 0, 4, 1, 54, 0, 51, 6, 6, 6, 25, 25, 25, 129, 6, 151, 28, 25, 25, 0, 51, 51, 50, 5, 5, 5, 26, 5, 5, 25, 6, 6, 25, 26, 246, 25, 25, 129, 6, 151, 3, 252, 56, 0, 53, 56, 55, 52];
@@ -211,9 +210,9 @@ Bug description:
 - bug-09 panicked at `capacity overflow`.
 - bug-10 causes a memory allocation failure.
 
-PoC:
+### PoC
 
-- bug-09
+#### bug-09
 
 ```rust
 let _local0 = <std::vec::Vec::<u8, std::alloc::Global> as std::convert::From::<&str>>::from("0");
@@ -221,7 +220,7 @@ let _local1: odoh_rs::ObliviousDoHMessagePlaintext = odoh_rs::ObliviousDoHMessag
 let _ = odoh_rs::ObliviousDoHMessagePlaintext::into_msg(_local1);
 ```
 
-- bug-10
+#### bug-10
 
 ```rust
 let _local0 = <std::vec::Vec::<u8, std::alloc::Global> as std::convert::From::<&str>>::from("0");
@@ -246,9 +245,9 @@ Bug description:
 - bug-11, bug-12 and bug-13 cause distinct overflow crashes with different certain input.
 - bug-14 causes a memory allocation failure.
 
-PoC:
+### PoC
 
-- bug-11
+#### bug-11
 
 ```rust
 let data = [0, 0, 0, 0];
@@ -259,7 +258,7 @@ let _local2_param0_helper1 = &(_local1);
 let _: usize = <std::vec::Vec<u32> as neli::Size>::unpadded_size(_local2_param0_helper1);
 ```
 
-- bug-12
+#### bug-12
 
 ```rust
 let data = [78, 122, 122, 122, 122, 250, 104, 122, 122, 122, 122, 56];
@@ -270,7 +269,7 @@ let _local2_param0_helper1 = &(_local1);
 let _: usize = <std::vec::Vec<u32> as neli::Size>::unpadded_size(_local2_param0_helper1);
 ```
 
-- bug-13
+#### bug-13
 
 ```rust
 let _local0 = neli::utils::NetlinkBitArray::new(0xffffffffffffffff);
@@ -280,7 +279,7 @@ let _local2_param0_helper1 = &(_local1);
 let _: usize = <std::vec::Vec::<u32> as neli::Size>::unpadded_size(_local2_param0_helper1);
 ```
 
-- bug-14
+#### bug-14
 
 ```rust
 let _local0 = neli::utils::NetlinkBitArray::new(361700864146343200);
@@ -312,9 +311,9 @@ Bug description:
 - Bug-18 panicked at "Attempt to end a preformatted block which wasn't opened".
 - Bug-19 causes an infinite loop.
 
-PoC:
+### PoC
 
-- bug-15
+#### bug-15
 
 ```rust
 let _local0 = html2text::render::text_renderer::SubRenderer::<html2text::render::text_renderer::RichDecorator>::new(11787190863583748771, html2text::render::text_renderer::RichDecorator{});
@@ -322,7 +321,7 @@ let mut _local1 = <html2text::render::text_renderer::SubRenderer::<html2text::re
 let _ = <html2text::render::text_renderer::SubRenderer::<html2text::render::text_renderer::RichDecorator> as html2text::render::Renderer>::add_horizontal_border(&mut _local1);
 ```
 
-- bug-16
+#### bug-16
 
 ```rust
 let data=[60, 116, 97, 98, 108, 101, 62, 60, 116, 114, 62, 60, 116, 100, 62, 120, 105, 60, 48, 62, 0, 0, 0, 60, 116, 97, 98, 108, 101, 62, 58, 58, 58, 62, 58, 62, 62, 62, 58, 60, 112, 32, 32, 32, 32, 32, 32, 32, 71, 87, 85, 78, 16, 16, 62, 60, 15, 16, 16, 16, 16, 16, 16, 15, 38, 16, 16, 16, 15, 1, 16, 16, 16, 16, 16, 16, 162, 111, 107, 99, 91, 112, 57, 64, 94, 100, 60, 111, 108, 47, 62, 127, 60, 108, 73, 62, 125, 109, 121, 102, 99, 122, 110, 102, 114, 98, 60, 97, 32, 104, 114, 101, 102, 61, 98, 111, 103, 32, 105, 100, 61, 100, 62, 60, 111, 15, 15, 15, 15, 15, 15, 15, 39, 15, 15, 15, 106, 102, 59, 99, 32, 32, 32, 86, 102, 122, 110, 104, 93, 108, 71, 114, 117, 110, 100, 96, 121, 57, 60, 107, 116, 109, 247, 62, 60, 32, 60, 122, 98, 99, 98, 97, 32, 119, 127, 127, 62, 60, 112, 62, 121, 116, 60, 47, 116, 100, 62, 62, 60, 111, 98, 62, 123, 110, 109, 97, 101, 105, 119, 60, 112, 101, 101, 122, 102, 63, 120, 97, 62, 60, 101, 62, 60, 120, 109, 112, 32, 28, 52, 55, 50, 50, 49, 52, 185, 150, 99, 62, 255, 112, 76, 85, 60, 112, 62, 73, 100, 116, 116, 60, 75, 50, 73, 116, 120, 110, 127, 255, 118, 32, 42, 40, 49, 33, 112, 32, 36, 107, 57, 60, 5, 163, 62, 49, 55, 32, 33, 118, 99, 63, 60, 109, 107, 43, 119, 100, 62, 60, 104, 58, 101, 163, 163, 163, 163, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220, 1, 107, 117, 107, 108, 44, 102, 58, 60, 116, 101, 97, 106, 98, 59, 60, 115, 109, 52, 58, 115, 98, 62, 232, 110, 114, 32, 60, 117, 93, 120, 112, 119, 111, 59, 98, 120, 61, 206, 19, 61, 206, 19, 59, 1, 110, 102, 60, 115, 0, 242, 64, 203, 8, 111, 50, 59, 121, 122, 32, 42, 35, 32, 37, 101, 120, 104, 121, 0, 242, 59, 63, 121, 231, 130, 130, 130, 170, 170, 1, 32, 0, 0, 0, 28, 134, 200, 90, 119, 48, 60, 111, 108, 118, 119, 116, 113, 59, 100, 60, 117, 43, 110, 99, 9, 216, 157, 137, 216, 157, 246, 167, 62, 60, 104, 61, 43, 28, 134, 200, 105, 119, 48, 60, 122, 110, 0, 242, 61, 61, 114, 231, 130, 130, 130, 170, 170, 170, 233, 222, 222, 162, 163, 163, 163, 163, 163, 163, 163, 85, 100, 116, 99, 61, 60, 163, 163, 163, 163, 163, 220, 220, 1, 109, 112, 105, 10, 59, 105, 220, 215, 10, 59, 122, 100, 100, 121, 97, 43, 43, 43, 102, 122, 100, 60, 62, 114, 116, 122, 115, 61, 60, 115, 101, 62, 215, 215, 215, 215, 215, 98, 59, 60, 109, 120, 57, 60, 97, 102, 113, 229, 43, 43, 43, 43, 43, 43, 43, 43, 43, 35, 43, 43, 101, 58, 60, 116, 98, 101, 107, 98, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 98, 99, 62, 60, 112, 102, 59, 124, 107, 111, 97, 98, 108, 118, 60, 116, 102, 101, 104, 97, 62, 60, 255, 127, 46, 60, 116, 101, 62, 60, 105, 102, 63, 116, 116, 60, 47, 116, 101, 62, 62, 60, 115, 98, 62, 123, 109, 108, 97, 100, 119, 118, 60, 111, 99, 97, 103, 99, 62, 60, 255, 127, 46, 60, 103, 99, 62, 60, 116, 98, 63, 60, 101, 62, 60, 109, 109, 231, 130, 130, 130, 213, 213, 213, 233, 222, 222, 59, 101, 103, 58, 60, 100, 111, 61, 65, 114, 104, 60, 47, 101, 109, 62, 60, 99, 99, 172, 97, 97, 58, 60, 119, 99, 64, 126, 118, 104, 100, 100, 107, 105, 60, 120, 98, 255, 255, 255, 0, 60, 255, 127, 46, 60, 113, 127];
@@ -330,7 +329,7 @@ let _local0: html2text::RenderTree = html2text::parse(&data[..]);
 let _local1: html2text::RenderedText::<html2text::render::text_renderer::RichDecorator> = html2text::RenderTree::render(_local0, 1, html2text::render::text_renderer::RichDecorator{});
 ```
 
-- bug-17
+#### bug-17
 
 ```rust
 let mut _local0: html2text::render::text_renderer::SubRenderer::<html2text::render::text_renderer::TrivialDecorator> = html2text::render::text_renderer::SubRenderer::<html2text::render::text_renderer::TrivialDecorator>::new(18446744073709551615, html2text::render::text_renderer::TrivialDecorator{});
@@ -338,7 +337,7 @@ let _local1_param0_helper1 = &mut (_local0);
 let _ = <html2text::render::text_renderer::SubRenderer::<html2text::render::text_renderer::TrivialDecorator> as html2text::render::Renderer>::end_strikeout(_local1_param0_helper1);
 ```
 
-- bug-18
+#### bug-18
 
 ```rust
 let _local0: html2text::render::text_renderer::SubRenderer::<html2text::render::text_renderer::RichDecorator> = html2text::render::text_renderer::SubRenderer::<html2text::render::text_renderer::RichDecorator>::new(14829735431805717965, html2text::render::text_renderer::RichDecorator{});
@@ -348,7 +347,7 @@ let _local2_param0_helper1 = &mut (_local1);
 let _ = <html2text::render::text_renderer::SubRenderer::<html2text::render::text_renderer::RichDecorator> as html2text::render::Renderer>::end_pre(_local2_param0_helper1);
 ```
 
-- bug-19
+#### bug-19
 
 ```rust
 let data=[60, 116, 97, 98, 108, 101, 62, 60, 116, 114, 62, 60, 116, 100, 62, 120, 105, 60, 48, 62, 0, 0, 0, 60, 116, 97, 98, 108, 101, 62, 58, 58, 58, 62, 58, 62, 62, 62, 58, 60, 112, 32, 32, 32, 32, 32, 32, 32, 71, 87, 85, 78, 16, 16, 62, 60, 15, 16, 16, 16, 16, 16, 16, 15, 38, 16, 16, 16, 15, 1, 16, 16, 16, 16, 16, 16, 162, 111, 107, 99, 91, 112, 57, 64, 94, 100, 60, 111, 108, 47, 62, 127, 60, 108, 73, 62, 125, 109, 121, 102, 99, 122, 110, 102, 114, 98, 60, 97, 32, 104, 114, 101, 102, 61, 98, 111, 103, 32, 105, 100, 61, 100, 62, 60, 111, 15, 15, 15, 15, 15, 15, 15, 39, 15, 15, 15, 106, 102, 59, 99, 32, 32, 32, 86, 102, 122, 110, 104, 93, 108, 71, 114, 117, 110, 100, 96, 121, 57, 60, 107, 116, 109, 247, 62, 60, 32, 60, 122, 98, 99, 98, 97, 32, 119, 127, 127, 62, 60, 112, 62, 121, 116, 60, 47, 116, 100, 62, 62, 60, 111, 98, 62, 123, 110, 109, 97, 101, 105, 119, 60, 112, 101, 101, 122, 102, 63, 120, 97, 62, 60, 101, 62, 60, 120, 109, 112, 32, 28, 52, 55, 50, 50, 49, 52, 185, 150, 99, 62, 255, 112, 76, 85, 60, 112, 62, 73, 100, 116, 116, 60, 75, 50, 73, 116, 120, 110, 127, 255, 118, 32, 42, 40, 49, 33, 112, 32, 36, 107, 57, 60, 5, 163, 62, 49, 55, 32, 33, 118, 99, 63, 60, 109, 107, 43, 119, 100, 62, 60, 104, 58, 101, 163, 163, 163, 163, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220, 1, 107, 117, 107, 108, 44, 102, 58, 60, 116, 101, 97, 106, 98, 59, 60, 115, 109, 52, 58, 115, 98, 62, 232, 110, 114, 32, 60, 117, 93, 120, 112, 119, 111, 59, 98, 120, 61, 206, 19, 61, 206, 19, 59, 1, 110, 102, 60, 115, 0, 242, 64, 203, 8, 111, 50, 59, 121, 122, 32, 42, 35, 32, 37, 101, 120, 104, 121, 0, 242, 59, 63, 121, 231, 130, 130, 130, 170, 170, 1, 32, 0, 0, 0, 28, 134, 200, 90, 119, 48, 60, 111, 108, 118, 119, 116, 113, 59, 100, 60, 117, 43, 110, 99, 9, 216, 157, 137, 216, 157, 246, 167, 62, 60, 104, 61, 43, 28, 134, 200, 105, 119, 48, 60, 122, 110, 0, 242, 61, 61, 114, 231, 130, 130, 130, 170, 170, 170, 233, 222, 222, 162, 163, 163, 163, 163, 163, 163, 163, 85, 100, 116, 99, 61, 60, 163, 163, 163, 163, 163, 220, 220, 1, 109, 112, 105, 10, 59, 105, 220, 215, 10, 59, 122, 100, 100, 121, 97, 43, 43, 43, 102, 122, 100, 60, 62, 114, 116, 122, 115, 61, 60, 115, 101, 62, 215, 215, 215, 215, 215, 98, 59, 60, 109, 120, 57, 60, 97, 102, 113, 229, 43, 43, 43, 43, 43, 43, 43, 43, 43, 35, 43, 43, 101, 58, 60, 116, 98, 101, 107, 98, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 98, 99, 62, 60, 112, 102, 59, 124, 107, 111, 97, 98, 108, 118, 60, 116, 102, 101, 104, 97, 62, 60, 255, 127, 46, 60, 116, 101, 62, 60, 105, 102, 63, 116, 116, 60, 47, 116, 101, 62, 62, 60, 115, 98, 62, 123, 109, 108, 97, 100, 119, 118, 60, 111, 99, 97, 103, 99, 62, 60, 255, 127, 46, 60, 103, 99, 62, 60, 116, 98, 63, 60, 101, 62, 60, 109, 109, 231, 130, 130, 130, 213, 213, 213, 233, 222, 222, 59, 101, 103, 58, 60, 100, 111, 61, 65, 114, 104, 60, 47, 101, 109, 62, 60, 99, 99, 172, 97, 97, 58, 60, 119, 99, 64, 126, 118, 104, 100, 100, 107, 105, 60, 120, 98, 255, 255, 255, 0, 60, 255, 127, 46, 60, 113, 127];
@@ -374,15 +373,15 @@ Bug description:
 - bug-20 panicked at "attempt to add with overflow" panic.
 - bug-21 panicked at "index out of bounds" panic.
 
-PoC:
+### PoC
 
-- bug-20
+#### bug-20
 
 ```rust
 let mut _local0: xorfilter::Fuse8::<xorfilter::NoHash> = xorfilter::Fuse8::<xorfilter::NoHash>::with_hasher(4177066232, xorfilter::NoHash{});
 ```
 
-- bug-21
+#### bug-21
 
 ```rust
 let _local0: xorfilter::Xor8::<xorfilter::NoHash> = xorfilter::Xor8::<xorfilter::NoHash>::with_hasher(xorfilter::NoHash{});
@@ -408,9 +407,9 @@ Bug description:
 
 - Bug-22 panic at `attempt to calculate the remainder with overflow`.
 
-PoC:
+### PoC
 
-- bug-22
+#### bug-22
 
 ```rust
 let _: i8 = num::integer::mod_floor(-128, -1); 
@@ -434,9 +433,9 @@ Bug description:
 
 - Bug-23 panicked at "attempt to add with overflow".
 
-PoC:
+### PoC
 
-- bug-23
+#### bug-23
 
 ```rust
 let _local0 = <std::vec::Vec::<u8> as std::convert::From::<&str>>::from("0");
